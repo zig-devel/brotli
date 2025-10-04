@@ -1,0 +1,14 @@
+name: Build and test library
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and test library
+    uses: zig-devel/.infra/.github/workflows/library.yml@main
