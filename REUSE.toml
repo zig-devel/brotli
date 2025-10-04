@@ -11,6 +11,8 @@ path = [
     ".gitignore",
     ".gitattributes",
     ".github/**/*.yml",
+    ".github/oldver.json",
+    ".github/newver.json",
 ]
 SPDX-FileCopyrightText = "Zig Devel contributors"
 SPDX-License-Identifier = "0BSD OR MIT"
