@@ -7,7 +7,7 @@ Generic-purpose lossless compression algorithm.
 Install library:
 
 ```sh
-zig fetch --save https://github.com/zig-devel/brotli/archive/refs/tags/1.1.0+0.tar.gz
+zig fetch --save https://github.com/zig-devel/brotli/archive/refs/tags/1.1.0-0.tar.gz
 ```
 
 Statically link with `mod` module:

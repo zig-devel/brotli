@@ -2,7 +2,7 @@
 oldver = ".github/oldver.json"
 newver = ".github/newver.json"
 
-[zlib]
+[upstream]
 source = "git"
 git = "https://github.com/google/brotli.git"
 prefix = "v"

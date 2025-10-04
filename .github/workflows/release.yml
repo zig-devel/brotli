@@ -1,0 +1,12 @@
+name: Prepare GH release
+
+on:
+  push:
+    tags: [ '*.*.*-*' ]
+
+jobs:
+  release:
+    name: Prepare GitHub release
+    uses: zig-devel/.infra/.github/workflows/release.yml@main
+    permissions:
+      contents: write
