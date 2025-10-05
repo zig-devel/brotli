@@ -1,5 +1,8 @@
 name: Build and test library
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [main]
@@ -11,4 +14,4 @@ on:
 jobs:
   build:
     name: Build and test library
-    uses: zig-devel/.infra/.github/workflows/library.yml@main
+    uses: zig-devel/.github/.github/workflows/library.yml@main

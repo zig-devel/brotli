@@ -7,6 +7,6 @@ on:
 jobs:
   release:
     name: Prepare GitHub release
-    uses: zig-devel/.infra/.github/workflows/release.yml@main
+    uses: zig-devel/.github/.github/workflows/release.yml@main
     permissions:
       contents: write
