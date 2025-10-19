@@ -14,4 +14,4 @@ on:
 jobs:
   build:
     name: Build and test library
-    uses: zig-devel/.github/.github/workflows/library.yml@latest
+    uses: zig-devel/toolset/.github/workflows/_library.yml@latest
