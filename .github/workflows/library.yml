@@ -1,11 +1,9 @@
 name: Build and test library
 
-permissions:
-  contents: read
-
 on:
   push:
     branches: [main]
+    tags: [ '*.*.*-*' ]
   pull_request:
     branches: [main]
     types: [opened, synchronize]
@@ -15,3 +13,5 @@ jobs:
   build:
     name: Build and test library
     uses: zig-devel/toolset/.github/workflows/_library.yml@latest
+    permissions:
+      contents: write
