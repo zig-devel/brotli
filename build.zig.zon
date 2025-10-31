@@ -1,6 +1,6 @@
 .{
     .name = .brotli,
-    .version = "1.1.0-0",
+    .version = "1.1.0-1",
     .fingerprint = 0xba7766d39f06ff51, // Changing this has security and trust implications.
     .minimum_zig_version = "0.15.1",
     .dependencies = .{
