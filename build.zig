@@ -1,23 +1,6 @@
 const std = @import("std");
 
 const public_path = "c/include";
-const public_headers = [_][]const u8{
-    "brotli/types.h",
-    "brotli/port.h",
-    "brotli/encode.h",
-    "brotli/decode.h",
-    "brotli/shared_dictionary.h",
-};
-
-const common_headers = [_][]const u8{
-    "c/common/transform.h",
-    "c/common/shared_dictionary_internal.h",
-    "c/common/platform.h",
-    "c/common/dictionary.h",
-    "c/common/context.h",
-    "c/common/constants.h",
-    "c/common/version.h",
-};
 
 const common_sources = [_][]const u8{
     "c/common/transform.c",
@@ -28,65 +11,11 @@ const common_sources = [_][]const u8{
     "c/common/constants.c",
 };
 
-const decoder_headers = [_][]const u8{
-    "c/dec/state.h",
-    "c/dec/prefix.h",
-    "c/dec/huffman.h",
-    "c/dec/bit_reader.h",
-};
-
 const decoder_sources = [_][]const u8{
     "c/dec/state.c",
     "c/dec/huffman.c",
     "c/dec/decode.c",
     "c/dec/bit_reader.c",
-};
-
-const encoder_headers = [_][]const u8{
-    "c/enc/write_bits.h",
-    "c/enc/utf8_util.h",
-    "c/enc/static_dict_lut.h",
-    "c/enc/static_dict.h",
-    "c/enc/state.h",
-    "c/enc/ringbuffer.h",
-    "c/enc/quality.h",
-    "c/enc/prefix.h",
-    "c/enc/params.h",
-    "c/enc/metablock_inc.h",
-    "c/enc/metablock.h",
-    "c/enc/memory.h",
-    "c/enc/literal_cost.h",
-    "c/enc/histogram.h",
-    "c/enc/hash_longest_match_quickly_inc.h",
-    "c/enc/hash_longest_match_inc.h",
-    "c/enc/hash_longest_match64_inc.h",
-    "c/enc/hash_forgetful_chain_inc.h",
-    "c/enc/hash.h",
-    "c/enc/find_match_length.h",
-    "c/enc/fast_log.h",
-    "c/enc/entropy_encode_static.h",
-    "c/enc/entropy_encode.h",
-    "c/enc/encoder_dict.h",
-    "c/enc/dictionary_hash.h",
-    "c/enc/compress_fragment_two_pass.h",
-    "c/enc/compress_fragment.h",
-    "c/enc/compound_dictionary.h",
-    "c/enc/command.h",
-    "c/enc/cluster.h",
-    "c/enc/brotli_bit_stream.h",
-    "c/enc/block_splitter_inc.h",
-    "c/enc/block_splitter.h",
-    "c/enc/bit_cost_inc.h",
-    "c/enc/bit_cost.h",
-    "c/enc/backward_references_hq.h",
-    "c/enc/backward_references.h",
-    "c/enc/histogram_inc.h",
-    "c/enc/hash_to_binary_tree_inc.h",
-    "c/enc/hash_rolling_inc.h",
-    "c/enc/hash_composite_inc.h",
-    "c/enc/cluster_inc.h",
-    "c/enc/block_encoder_inc.h",
-    "c/enc/backward_references_inc.h",
 };
 
 const encoder_sources = [_][]const u8{
@@ -125,13 +54,11 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    const brotlicmn = cc_library(b, mod, upstream, "brotlicommon", &common_headers, &common_sources);
-    brotlicmn.installHeadersDirectory(upstream.path(public_path), "", .{
-        .include_extensions = &public_headers,
-    });
+    const brotlicmn = cc_library(b, mod, upstream, "brotlicommon", &common_sources);
+    brotlicmn.installHeadersDirectory(upstream.path(public_path), "", .{});
 
-    const brotlidec = cc_library(b, mod, upstream, "brotlidec", &decoder_headers, &decoder_sources);
-    const brotlienc = cc_library(b, mod, upstream, "brotlienc", &encoder_headers, &encoder_sources);
+    const brotlidec = cc_library(b, mod, upstream, "brotlidec", &decoder_sources);
+    const brotlienc = cc_library(b, mod, upstream, "brotlienc", &encoder_sources);
 
     // Smoke unit test
     const test_mod = b.addModule("test", .{
@@ -154,7 +81,6 @@ fn cc_library(
     m: *std.Build.Module,
     upstream: *std.Build.Dependency,
     name: []const u8,
-    headers: []const []const u8,
     sources: []const []const u8,
 ) *std.Build.Step.Compile {
     const lib = b.addLibrary(.{
@@ -163,9 +89,6 @@ fn cc_library(
         .root_module = m,
     });
     lib.addIncludePath(upstream.path(public_path));
-    lib.installHeadersDirectory(upstream.path(""), "", .{
-        .include_extensions = headers,
-    });
     lib.addCSourceFiles(.{
         .root = upstream.path(""),
         .files = sources,
