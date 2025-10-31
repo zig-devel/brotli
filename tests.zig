@@ -28,6 +28,6 @@ test {
 
     try std.testing.expectEqual(encoderVersion, decoderVersion);
 
-    try std.testing.expectEqualStrings(encVersionStr, "1.1.0");
-    try std.testing.expectEqualStrings(decVersionStr, "1.1.0");
+    try std.testing.expectEqualStrings(encVersionStr, "1.2.0");
+    try std.testing.expectEqualStrings(decVersionStr, "1.2.0");
 }

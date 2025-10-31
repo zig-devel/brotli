@@ -1,4 +1,4 @@
-# [brotli](https://github.com/google/brotli)@v1.1.0 [![Build and test library](https://github.com/zig-devel/brotli/actions/workflows/library.yml/badge.svg)](https://github.com/zig-devel/brotli/actions/workflows/library.yml)
+# [brotli](https://github.com/google/brotli)@v1.2.0 [![Build and test library](https://github.com/zig-devel/brotli/actions/workflows/library.yml/badge.svg)](https://github.com/zig-devel/brotli/actions/workflows/library.yml)
 
 Generic-purpose lossless compression algorithm.
 
@@ -7,7 +7,7 @@ Generic-purpose lossless compression algorithm.
 Install library:
 
 ```sh
-zig fetch --save https://github.com/zig-devel/brotli/archive/refs/tags/1.1.0-1.tar.gz
+zig fetch --save https://github.com/zig-devel/brotli/archive/refs/tags/1.2.0-0.tar.gz
 ```
 
 Statically link with `mod` module:
